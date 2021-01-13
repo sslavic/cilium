@@ -438,6 +438,14 @@ func (r *flowsReader) Next(ctx context.Context) (*observerpb.GetFlowsResponse, e
 					AgentEvent: ev,
 				},
 			}, nil
+		case *flowpb.DebugEvent:
+			return &observerpb.GetFlowsResponse{
+				Time:     e.Timestamp,
+				NodeName: nodeTypes.GetName(),
+				ResponseTypes: &observerpb.GetFlowsResponse_DebugEvent{
+					DebugEvent: ev,
+				},
+			}, nil
 		}
 	}
 }
